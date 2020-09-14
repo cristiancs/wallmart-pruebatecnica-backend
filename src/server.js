@@ -5,11 +5,12 @@ import http from "http";
 
 import mongoHandler from "./modules/mongoHandler";
 
-const app = require("./app");
+
 const port = config.HTTP_PORT || 8080;
 
 let db, server;
 
+const app = require("./app");
 async function run() {
   try {
     db = await mongoHandler();
@@ -17,7 +18,7 @@ async function run() {
     console.log(error);
     return;
   }
-  server = http.createServer(app).listen(port, function () {
+  server = http.createServer(app(db)).listen(port, function () {
     console.log("HTTP Server Started",port);
   });
 }
