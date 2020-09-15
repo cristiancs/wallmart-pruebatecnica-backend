@@ -5,7 +5,7 @@ import http from "http";
 
 import mongoHandler from "./modules/mongoHandler";
 
-const port = config.HTTP_PORT || 8080;
+const port = config.PORT || 8080;
 
 let db, server;
 

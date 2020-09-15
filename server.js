@@ -1,2 +1,2 @@
 require("@babel/polyfill");
-require("./build/server");
+require("./build/prod/server");
