@@ -44,20 +44,21 @@ function appWrapper(db) {
 				.json({ message: "Debes indicar un termino de búsqueda" });
 		}
 		if (isNaN(term) && term.length <= 3) {
-			return res
-				.status(400)
-				.json({
-					message:
-						"El largo mínimo de búsqueda debe ser de 4 caracteres",
-				});
+			return res.status(400).json({
+				message: "El largo mínimo de búsqueda debe ser de 4 caracteres",
+			});
 		}
 
 		let findTerm = { id: Number(term) };
 		if (isNaN(term)) {
 			findTerm = {
 				$or: [
-					{ brand: new RegExp(escapeRegExp(term)) },
-					{ description: new RegExp(escapeRegExp(term)) },
+					{
+						brand: new RegExp(escapeRegExp(term), "i"),
+					},
+					{
+						description: new RegExp(escapeRegExp(term), "i"),
+					},
 				],
 			};
 		}
@@ -74,14 +75,12 @@ function appWrapper(db) {
 				Number(config.ITEMS_PER_PAGE)
 		);
 
-		return res
-			.status(200)
-			.json({
-				resultado,
-				pages: Math.ceil(total / Number(config.ITEMS_PER_PAGE)),
-				items: total,
-				promoDiscount: isPalindrome(term),
-			});
+		return res.status(200).json({
+			resultado,
+			pages: Math.ceil(total / Number(config.ITEMS_PER_PAGE)),
+			items: total,
+			promoDiscount: isPalindrome(term),
+		});
 	});
 	return app;
 }
