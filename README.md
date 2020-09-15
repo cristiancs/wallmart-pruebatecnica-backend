@@ -10,6 +10,8 @@
 
     yarn test
 
+    * Las pruebas están pensadas para usar ITEMS_PER_PAGE=2
+
 ## Producción
 
     yarn build

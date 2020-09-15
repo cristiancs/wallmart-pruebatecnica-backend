@@ -86,6 +86,13 @@ describe("Search Endpoints con BD", () => {
 			promoDiscount: false,
 		});
 	});
+	it("busca con mayúsculas y minúsculas ", async () => {
+		const minuscula = await request(app).get("/search?term=rlñlw");
+		expect(minuscula.statusCode).toEqual(200);
+		const mayuscula = await request(app).get("/search?term=rlÑlW");
+		expect(mayuscula.statusCode).toEqual(200);
+		expect(minuscula.body).toEqual(mayuscula.body);
+	});
 	it("Pagina 4 con rlñlw", async () => {
 		const res = await request(app).get("/search?term=rlñlw&page=4");
 		expect(res.statusCode).toEqual(200);
