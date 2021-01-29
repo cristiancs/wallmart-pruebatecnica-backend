@@ -7,17 +7,16 @@ import mongoHandler from "./modules/mongoHandler";
 
 const port = config.PORT || 8080;
 
-let db, server;
 
 const app = require("./app");
 async function run() {
 	try {
-		db = await mongoHandler();
+		await mongoHandler.connect();
 	} catch (error) {
 		console.log(error);
 		return;
 	}
-	server = http.createServer(app(db)).listen(port, function () {
+	 http.createServer(app()).listen(port, function () {
 		console.log("HTTP Server Started", port);
 	});
 }
