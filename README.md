@@ -4,7 +4,7 @@
 
     cp .env.example .env
     yarn install
-    yarn run dev
+    yarn dev
 
 ## Pruebas
 
