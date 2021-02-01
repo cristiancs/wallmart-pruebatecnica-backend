@@ -1,10 +1,9 @@
-require("dotenv").config();
-
 import express from "express";
 import bodyParser from "body-parser";
 import search from "./routes/search";
+import searchValidation from "./validation/searchValidation";
 
-
+require("dotenv").config();
 
 function allowCrossSite(req, res, next) {
 	res.setHeader("Access-Control-Allow-Origin", "*"); // Every domain can access
@@ -27,7 +26,7 @@ function appWrapper() {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 
-	app.use("/search", search);
+	app.use("/search", searchValidation, search);
 	return app;
 }
 

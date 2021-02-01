@@ -1,14 +1,15 @@
-require("dotenv").config();
-const config = process.env;
-
 import http from "http";
 
 import mongoHandler from "./modules/mongoHandler";
 
+require("dotenv").config();
+
+const config = process.env;
+
 const port = config.PORT || 8080;
 
-
 const app = require("./app");
+
 async function run() {
 	try {
 		await mongoHandler.connect();
@@ -16,7 +17,7 @@ async function run() {
 		console.log(error);
 		return;
 	}
-	 http.createServer(app()).listen(port, function () {
+	http.createServer(app()).listen(port, () => {
 		console.log("HTTP Server Started", port);
 	});
 }
