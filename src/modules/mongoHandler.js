@@ -1,8 +1,11 @@
-require("dotenv").config();
 import { MongoClient } from "mongodb";
-let dbclient, db;
 
-let config = process.env;
+require("dotenv").config();
+
+let dbclient;
+let db;
+
+const config = process.env;
 
 export default {
 	async connect() {
@@ -11,7 +14,7 @@ export default {
 				useUnifiedTopology: true,
 			});
 			db = dbclient.db(config.MONGODB_DATABASE);
-			console.log("Connected to MongoDb")
+			console.log("Connected to MongoDb");
 			return db;
 		} catch (error) {
 			console.log(error);
@@ -22,7 +25,7 @@ export default {
 		await dbclient.close();
 	},
 
-	getDb(){
+	getDb() {
 		return db;
-	}
-}
+	},
+};

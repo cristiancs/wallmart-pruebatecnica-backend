@@ -6,10 +6,9 @@ require("dotenv").config();
 
 const config = process.env;
 
-export default async (req, res) => {
+export default async (term, page) => {
 	const db = mongoHandler.getDb();
 
-	const { term, page = 0 } = req.query;
 	let findTerm = { id: Number(term) };
 	if (isNaN(term)) {
 		findTerm = {

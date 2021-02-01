@@ -7,8 +7,7 @@ describe("Validate search input", () => {
 	let mockResponse;
 	beforeEach(() => {
 		mockResponse = {
-			status: jest.fn().mockReturnValue(mockResponse),
-			json: jest.fn().mockReturnValue(mockResponse),
+			json: jest.fn(),
 		};
 	});
 	it("Searches  with valid term and request passes", async () => {
